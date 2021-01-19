@@ -46,9 +46,9 @@ def digits_to_words(input_string):
     digit_string = ''
     for i in input_string:
         if i in num2alpha_d:
-            digit_string += num2alpha_d[i]
-        else:
-            digit_string += i
+            digit_string += num2alpha_d[i] + ' '
+    
+    digit_string = digit_string.rstrip()
     
     return digit_string
 
@@ -86,7 +86,7 @@ def to_camel_case(underscore_str):
             "alreadyCamel"
     """
     to_be_replaced_l = list(re.findall(r'_[a-z]', underscore_str))
-    camelcase_str = underscore_str
+    camelcase_str = underscore_str.strip('_').lower()
 
     for i in to_be_replaced_l:
         camelcase_str = camelcase_str.replace(i, i.upper())
