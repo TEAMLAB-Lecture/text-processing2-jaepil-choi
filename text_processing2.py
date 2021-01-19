@@ -85,7 +85,13 @@ def to_camel_case(underscore_str):
             >>> tp2.to_camel_case(underscore_str3)
             "alreadyCamel"
     """
-    camelcase_str = underscore_str.strip('_').lower()
+    camelcase_str = underscore_str.strip('_')
+
+    if '_' not in camelcase_str:
+        return camelcase_str
+    else: # TODO: Can't handle "alreadyCamel_not"
+        camelcase_str = camelcase_str.lower()
+
     to_be_replaced_l = list(re.findall(r'_[a-z]', camelcase_str))
     
 
