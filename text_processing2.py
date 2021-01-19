@@ -2,6 +2,7 @@
 # Test Processing II  #
 #######################
 
+import re
 
 def digits_to_words(input_string):
     """
@@ -28,7 +29,27 @@ def digits_to_words(input_string):
             >>> tp2.digits_to_words(digits_str2)
             'three one four one five'
     """
-    digit_string = None
+
+    num2alpha_d = {
+        '1': 'one',
+        '2': 'two',
+        '3': 'three',
+        '4': 'four',
+        '5': 'five',
+        '6': 'six',
+        '7': 'seven',
+        '8': 'eight', 
+        '9': 'nine', 
+        '0': 'zero',
+    }
+
+    digit_string = ''
+    for i in input_string:
+        if i in num2alpha_d:
+            digit_string += num2alpha_d[i] + ' '
+    
+    digit_string = digit_string.rstrip()
+    
     return digit_string
 
 
@@ -64,5 +85,18 @@ def to_camel_case(underscore_str):
             >>> tp2.to_camel_case(underscore_str3)
             "alreadyCamel"
     """
-    camelcase_str = None
+    camelcase_str = underscore_str.strip('_')
+
+    if '_' not in camelcase_str:
+        return camelcase_str
+    else: # TODO: Can't handle "alreadyCamel_not"
+        camelcase_str = camelcase_str.lower()
+
+    to_be_replaced_l = list(re.findall(r'_[a-z]', camelcase_str))
+    
+
+    for i in to_be_replaced_l:
+        camelcase_str = camelcase_str.replace(i, i.upper())
+    camelcase_str = camelcase_str.replace('_', '')
+
     return camelcase_str
