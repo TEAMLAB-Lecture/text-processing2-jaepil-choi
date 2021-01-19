@@ -89,6 +89,7 @@ def to_camel_case(underscore_str):
     camelcase_str = underscore_str
 
     for i in to_be_replaced_l:
-        camelcase_str = camelcase_str.replace(i, i.lstrip('_').upper())
+        camelcase_str = camelcase_str.replace(i, i.upper())
+    camelcase_str = camelcase_str.replace('_', '')
 
     return camelcase_str
